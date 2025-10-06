@@ -19,7 +19,7 @@ def run_new_sql_scripts(directory, conn, applied_scripts):
     sql_files = sorted(Path(directory).glob("*.sql"))
     for sql_file in sql_files:
         if sql_file.name in applied_scripts:
-            print(f"Skipping {sql_file.name} (already applied)")
+            print(f"Skipping {directory}/{sql_file.name} (already applied)")
             continue
 
         print(f"Running {sql_file.name}...")
@@ -31,12 +31,13 @@ def run_new_sql_scripts(directory, conn, applied_scripts):
                 if stmt:
                     conn.cursor().execute(stmt)
             # Mark as applied
+            insert_to_etl_log = f"{directory}/{sql_file.name}"
             conn.cursor().execute(
-                "INSERT INTO ETL_DEPLOY_LOG (SCRIPT_NAME) VALUES (%s)", (sql_file.name,)
+                "INSERT INTO ETL_DEPLOY_LOG (SCRIPT_NAME) VALUES (%s)", (insert_to_etl_log,)
             )
-            print(f"{sql_file.name} executed successfully.")
+            print(f"{directory}/{sql_file.name} executed successfully.")
         except Exception as e:
-            print(f"Error in {sql_file.name}: {e}")
+            print(f"Error in {directory}/{sql_file.name}: {e}")
             raise
 
 def main():
