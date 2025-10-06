@@ -7,3 +7,6 @@ INSERT INTO TEST_TABLE (ID, NAME) VALUES
 -- Optional: another insert
 INSERT INTO TEST_TABLE (ID, NAME) VALUES
     (4, 'David');
+-- Optional: another insert
+INSERT INTO TEST_TABLE (ID, NAME) VALUES
+    (5, 'Ankit');
