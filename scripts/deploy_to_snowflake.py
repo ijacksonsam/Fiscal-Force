@@ -18,7 +18,7 @@ def run_new_sql_scripts(directory, conn, applied_scripts):
     """Run only new SQL files in a given directory"""
     sql_files = sorted(Path(directory).glob("*.sql"))
     for sql_file in sql_files:
-        if {directory}/{sql_file.name} in applied_scripts:
+        if f"{directory}/{sql_file.name}" in applied_scripts:
             print(f"Skipping {directory}/{sql_file.name} (already applied)")
             continue
 
