@@ -5,8 +5,8 @@ on:
     branches:
       - main
     paths:
-      - 'DDL/**'
-      - 'DML/**'
+      - 'snowDDL/**'
+      - 'snowDML/**'
 
 jobs:
   deploy:
@@ -24,7 +24,7 @@ jobs:
       - name: Install dependencies
         run: pip install snowflake-connector-python
 
-      - name: Deploy SQL scripts to Snowflake
+      - name: Deploy new SQL scripts to Snowflake
         env:
           SNOW_ACCOUNT: ${{ secrets.SNOW_ACCOUNT }}
           SNOW_USER: ${{ secrets.SNOW_USER }}
